@@ -151,9 +151,12 @@ export default function DashProfile() {
 
   const handleSignout = async () => {
     try {
-      const res = await fetch("/api/user/signout", {
-        method: "POST",
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/user/signout`,
+        {
+          method: "POST",
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
@@ -177,7 +180,8 @@ export default function DashProfile() {
         />
         <div
           className="relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full"
-          onClick={() => filePickerRef.current.click()}>
+          onClick={() => filePickerRef.current.click()}
+        >
           {imageFileUploadProgress && (
             <CircularProgressbar
               value={imageFileUploadProgress || 0}
@@ -236,7 +240,8 @@ export default function DashProfile() {
           type="submit"
           gradientDuoTone="purpleToBlue"
           outline
-          disabled={loading || imageFileUploading}>
+          disabled={loading || imageFileUploading}
+        >
           {loading ? "Loading..." : "Update"}
         </Button>
         {currentUser.isAdmin && (
@@ -244,7 +249,8 @@ export default function DashProfile() {
             <Button
               type="button"
               gradientDuoTone="purpleToPink"
-              className="w-full">
+              className="w-full"
+            >
               Create a post
             </Button>
           </Link>
@@ -277,7 +283,8 @@ export default function DashProfile() {
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
-        size="md">
+        size="md"
+      >
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">

@@ -36,7 +36,9 @@ export default function Search() {
     const fetchPosts = async () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/post/getposts?${searchQuery}`);
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/post/getposts?${searchQuery}`
+      );
       if (!res.ok) {
         setLoading(false);
         return;
@@ -85,7 +87,9 @@ export default function Search() {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/post/getposts?${searchQuery}`);
+    const res = await fetch(
+      `${import.meta.env.VITE_SERVER}/api/post/getposts?${searchQuery}`
+    );
     if (!res.ok) {
       return;
     }
@@ -128,7 +132,8 @@ export default function Search() {
             <Select
               onChange={handleChange}
               value={sidebarData.category}
-              id="category">
+              id="category"
+            >
               <option value="uncategorized">Uncategorized</option>
               <option value="reactjs">React.js</option>
               <option value="nextjs">Next.js</option>
@@ -155,7 +160,8 @@ export default function Search() {
           {showMore && (
             <button
               onClick={handleShowMore}
-              className="text-teal-500 text-lg hover:underline p-7 w-full">
+              className="text-teal-500 text-lg hover:underline p-7 w-full"
+            >
               Show More
             </button>
           )}

@@ -26,7 +26,9 @@ const UpdatePost = () => {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`/api/post/getposts?postId=${postId}`);
+        const res = await fetch(
+          `${import.meta.env.VITE_SERVER}/api/post/getposts?postId=${postId}`
+        );
         const data = await res.json();
         if (!res.ok) {
           console.log(data.message);
@@ -85,13 +87,16 @@ const UpdatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/post/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/post/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         setPublicError(data.message);
@@ -124,7 +129,8 @@ const UpdatePost = () => {
           <Select
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
-            }>
+            }
+          >
             <option value="uncategorized">Select a category</option>
             <option value="javascript">JavaScript</option>
             <option value="reactjs">React.js</option>
@@ -143,7 +149,8 @@ const UpdatePost = () => {
             size="sm"
             outline
             onClick={handleUploadImage}
-            disabled={imageUploadProgress}>
+            disabled={imageUploadProgress}
+          >
             {imageUploadProgress ? (
               <div className="w-16 h-16">
                 <CircularProgressbar

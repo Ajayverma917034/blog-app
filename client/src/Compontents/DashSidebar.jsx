@@ -27,9 +27,12 @@ const DashSidebar = () => {
 
   const handleSignout = async () => {
     try {
-      const res = await fetch("/api/user/signout", {
-        method: "POST",
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/user/signout`,
+        {
+          method: "POST",
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
@@ -51,7 +54,8 @@ const DashSidebar = () => {
                 <Sidebar.Item
                   active={tab === "dash" || !tab}
                   icon={HiChartPie}
-                  as="div">
+                  as="div"
+                >
                   Dashboard
                 </Sidebar.Item>
               </Link>
@@ -62,7 +66,8 @@ const DashSidebar = () => {
                 icon={HiUser}
                 label={currentUser.isAdmin ? "Admin" : "User"}
                 labelColor="dark"
-                as="div">
+                as="div"
+              >
                 Profile
               </Sidebar.Item>
             </Link>
@@ -72,7 +77,8 @@ const DashSidebar = () => {
                 <Sidebar.Item
                   active={tab === "posts"}
                   icon={HiDocumentText}
-                  as="div">
+                  as="div"
+                >
                   Posts
                 </Sidebar.Item>
               </Link>
@@ -82,7 +88,8 @@ const DashSidebar = () => {
                 <Sidebar.Item
                   active={tab === "users"}
                   icon={HiOutlineUserGroup}
-                  as="div">
+                  as="div"
+                >
                   Users
                 </Sidebar.Item>
               </Link>
@@ -91,7 +98,8 @@ const DashSidebar = () => {
             <Sidebar.Item
               icon={HiArrowSmRight}
               onClick={handleSignout}
-              className="cursor-pointer">
+              className="cursor-pointer"
+            >
               Sign Out
             </Sidebar.Item>
           </Sidebar.ItemGroup>

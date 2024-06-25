@@ -22,11 +22,14 @@ const SignUp = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: { "content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         navigate("/signin");

@@ -61,13 +61,16 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/post/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/post/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         setpublicError(data.message);
@@ -100,7 +103,8 @@ const CreatePost = () => {
           <Select
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
-            }>
+            }
+          >
             <option value="uncategorized">Select a category</option>
             <option value="javascript">JavaScript</option>
             <option value="reactjs">React.js</option>
@@ -119,7 +123,8 @@ const CreatePost = () => {
             size="sm"
             outline
             onClick={handleUploadImage}
-            disabled={imageUploadProgress}>
+            disabled={imageUploadProgress}
+          >
             {imageUploadProgress ? (
               <div className="w-16 h-16">
                 <CircularProgressbar

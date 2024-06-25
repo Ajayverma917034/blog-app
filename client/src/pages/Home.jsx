@@ -9,7 +9,9 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch("/api/post/getPosts");
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/post/getPosts`
+      );
       const data = await res.json();
       setPosts(data.posts);
     };
@@ -35,7 +37,8 @@ export default function Home() {
         </p>
         <Link
           to="/search"
-          className="text-xs sm:text-sm text-teal-500 font-bold hover:underline">
+          className="text-xs sm:text-sm text-teal-500 font-bold hover:underline"
+        >
           View all posts
         </Link>
       </div>
@@ -54,7 +57,8 @@ export default function Home() {
             </div>
             <Link
               to={"/search"}
-              className="text-lg text-teal-500 hover:underline text-center">
+              className="text-lg text-teal-500 hover:underline text-center"
+            >
               View all posts
             </Link>
           </div>

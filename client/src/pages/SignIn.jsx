@@ -25,11 +25,14 @@ const SignIn = () => {
 
     try {
       dispatch(signInstart());
-      const res = await fetch("/api/auth/signin", {
-        method: "POST",
-        headers: { "content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/auth/signin`,
+        {
+          method: "POST",
+          headers: { "content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));

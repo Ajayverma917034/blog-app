@@ -37,9 +37,12 @@ const Header = () => {
 
   const handleSignout = async () => {
     try {
-      const res = await fetch("/api/user/signout", {
-        method: "POST",
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/user/signout`,
+        {
+          method: "POST",
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
@@ -51,7 +54,7 @@ const Header = () => {
 
   // const handleSignout = async () => {
   //   try {
-  //     const res = await fetch("/api/user/signout", {
+  //     const res = await fetch(`${import.meta.env.VITE_SERVER}/api/user/signout", {
   //       method: "POST",
   //     });
   //     const data = await res.json();
@@ -77,7 +80,8 @@ const Header = () => {
     <Navbar className="border-b-2 border-red-300">
       <Link
         to="/"
-        className=" flex items-center text-sm sm:text-xl dark:text-white">
+        className=" flex items-center text-sm sm:text-xl dark:text-white"
+      >
         <Link to="/" className="font-bold dark:text-white text-2xl">
           <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
             Aditya
@@ -103,7 +107,8 @@ const Header = () => {
           className="w-12 h-10 hidden sm:inline"
           color="gray"
           pill
-          onClick={() => dispatch(toggleTheme())}>
+          onClick={() => dispatch(toggleTheme())}
+        >
           {theme === "light" ? <FaSun /> : <FaMoon />}
         </Button>
         {currentUser ? (
@@ -112,7 +117,8 @@ const Header = () => {
             inline
             label={
               <Avatar alt="user" img={currentUser.profilePicture} rounded />
-            }>
+            }
+          >
             <Dropdown.Header>
               <span className="block text-sm">@{currentUser.username}</span>
               <span className="block text-sm font-medium truncate ">

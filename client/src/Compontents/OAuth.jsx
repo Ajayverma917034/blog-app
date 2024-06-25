@@ -17,15 +17,18 @@ export default function OAuth() {
     provider.setCustomParameters({ prompt: "select_account" });
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
-      const res = await fetch("/api/auth/google", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: resultsFromGoogle.user.displayName,
-          email: resultsFromGoogle.user.email,
-          googlePhotoUrl: resultsFromGoogle.user.photoURL,
-        }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER}/api/auth/google`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: resultsFromGoogle.user.displayName,
+            email: resultsFromGoogle.user.email,
+            googlePhotoUrl: resultsFromGoogle.user.photoURL,
+          }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         dispatch(signInsucess(data));
@@ -40,7 +43,8 @@ export default function OAuth() {
       type="button"
       gradientDuoTone="pinkToOrange"
       outline
-      onClick={handleGoogleClick}>
+      onClick={handleGoogleClick}
+    >
       <AiFillGoogleCircle className="w-6 h-6 mr-2" />
       Continue with Google
     </Button>

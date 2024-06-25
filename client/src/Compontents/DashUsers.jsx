@@ -13,7 +13,9 @@ export default function DashUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`/api/user/getusers`);
+        const res = await fetch(
+          `${import.meta.env.VITE_SERVER}/api/user/getusers`
+        );
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -33,7 +35,11 @@ export default function DashUsers() {
   const handleShowMore = async () => {
     const startIndex = users.length;
     try {
-      const res = await fetch(`/api/user/getusers?startIndex=${startIndex}`);
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_SERVER
+        }/api/user/getusers?startIndex=${startIndex}`
+      );
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
@@ -89,7 +95,8 @@ export default function DashUsers() {
                         setShowModal(true);
                         setUserIdToDelete(user._id);
                       }}
-                      className="font-medium text-red-500 hover:underline cursor-pointer">
+                      className="font-medium text-red-500 hover:underline cursor-pointer"
+                    >
                       Delete
                     </span>
                   </Table.Cell>
@@ -100,7 +107,8 @@ export default function DashUsers() {
           {showMore && (
             <button
               onClick={handleShowMore}
-              className="w-full text-teal-500 self-center text-sm py-7">
+              className="w-full text-teal-500 self-center text-sm py-7"
+            >
               Show more
             </button>
           )}
@@ -112,7 +120,8 @@ export default function DashUsers() {
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
-        size="md">
+        size="md"
+      >
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
